@@ -3,7 +3,7 @@ package jsonschema_test
 import (
 	"testing"
 
-	"github.com/liushuangls/go-openai/jsonschema"
+	"github.com/sashabaranov/go-openai/jsonschema"
 )
 
 // TestGenerateSchemaForType_ErrorPaths verifies error handling for unsupported types.

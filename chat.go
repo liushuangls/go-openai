@@ -327,6 +327,9 @@ type ChatCompletionRequest struct {
 	SafetyIdentifier string `json:"safety_identifier,omitempty"`
 	// Embedded struct for non-OpenAI extensions
 	ChatCompletionRequestExtensions
+	// Volcengine Thinking Model Dedicated Parameters
+	// https://www.volcengine.com/docs/82379/1449737#%E5%85%B3%E9%97%AD%E6%B7%B1%E5%BA%A6%E6%80%9D%E8%80%83
+	Thinking *Thinking `json:"thinking,omitempty"`
 }
 
 type StreamOptions struct {
@@ -397,6 +400,18 @@ type LogProbs struct {
 type Prediction struct {
 	Content string `json:"content"`
 	Type    string `json:"type"`
+}
+
+type ThinkingType string
+
+const (
+	ThinkingTypeAuto     ThinkingType = "auto"
+	ThinkingTypeDisabled ThinkingType = "disabled"
+	ThinkingTypeEnabled  ThinkingType = "enabled"
+)
+
+type Thinking struct {
+	Type ThinkingType `json:"type"`
 }
 
 type FinishReason string

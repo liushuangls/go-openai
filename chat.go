@@ -330,6 +330,12 @@ type ChatCompletionRequest struct {
 	// Volcengine Thinking Model Dedicated Parameters
 	// https://www.volcengine.com/docs/82379/1449737#%E5%85%B3%E9%97%AD%E6%B7%B1%E5%BA%A6%E6%80%9D%E8%80%83
 	Thinking *Thinking `json:"thinking,omitempty"`
+	// Novita: Whether to separate the reasoning from the “content” into “reasoning_content” field.
+	// https://novita.ai/docs/api-reference/model-apis-llm-create-chat-completion#param-separate-reasoning
+	SeparateReasoning *bool `json:"separate_reasoning,omitempty"`
+	// Novita: Controls the switches between thinking and non-thinking modes.
+	// https://novita.ai/docs/api-reference/model-apis-llm-create-chat-completion#param-enable-thinking
+	EnableThinking *bool `json:"enable_thinking,omitempty"`
 }
 
 type StreamOptions struct {

@@ -320,6 +320,12 @@ type ChatCompletionRequest struct {
 	ChatTemplateKwargs map[string]any `json:"chat_template_kwargs,omitempty"`
 	// Specifies the latency tier to use for processing the request.
 	ServiceTier ServiceTier `json:"service_tier,omitempty"`
+	// Verbosity determines how many output tokens are generated. Lowering the number of
+	// tokens reduces overall latency. It can be set to "low", "medium", or "high".
+	// Note: This field is only confirmed to work with gpt-5, gpt-5-mini and gpt-5-nano.
+	// Also, it is not in the API reference of chat completion at the time of writing,
+	// though it is supported by the API.
+	Verbosity string `json:"verbosity,omitempty"`
 	// A stable identifier used to help detect users of your application that may be violating OpenAI's usage policies.
 	// The IDs should be a string that uniquely identifies each user.
 	// We recommend hashing their username or email address, in order to avoid sending us any identifying information.
@@ -327,6 +333,15 @@ type ChatCompletionRequest struct {
 	SafetyIdentifier string `json:"safety_identifier,omitempty"`
 	// Embedded struct for non-OpenAI extensions
 	ChatCompletionRequestExtensions
+	// Volcengine Thinking Model Dedicated Parameters
+	// https://www.volcengine.com/docs/82379/1449737#%E5%85%B3%E9%97%AD%E6%B7%B1%E5%BA%A6%E6%80%9D%E8%80%83
+	Thinking *Thinking `json:"thinking,omitempty"`
+	// Novita: Whether to separate the reasoning from the “content” into “reasoning_content” field.
+	// https://novita.ai/docs/api-reference/model-apis-llm-create-chat-completion#param-separate-reasoning
+	SeparateReasoning *bool `json:"separate_reasoning,omitempty"`
+	// Novita: Controls the switches between thinking and non-thinking modes.
+	// https://novita.ai/docs/api-reference/model-apis-llm-create-chat-completion#param-enable-thinking
+	EnableThinking *bool `json:"enable_thinking,omitempty"`
 }
 
 type StreamOptions struct {
@@ -335,6 +350,18 @@ type StreamOptions struct {
 	// and the choices field will always be an empty array.
 	// All other chunks will also include a usage field, but with a null value.
 	IncludeUsage bool `json:"include_usage,omitempty"`
+}
+
+type ThinkingType string
+
+const (
+	ThinkingTypeAuto     ThinkingType = "auto"
+	ThinkingTypeDisabled ThinkingType = "disabled"
+	ThinkingTypeEnabled  ThinkingType = "enabled"
+)
+
+type Thinking struct {
+	Type ThinkingType `json:"type"`
 }
 
 type ToolType string

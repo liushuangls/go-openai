@@ -342,6 +342,9 @@ type ChatCompletionRequest struct {
 	// Novita: Controls the switches between thinking and non-thinking modes.
 	// https://novita.ai/docs/api-reference/model-apis-llm-create-chat-completion#param-enable-thinking
 	EnableThinking *bool `json:"enable_thinking,omitempty"`
+	// Aliyun: Controls the thinking max tokens.
+	// https://platform.qianwenai.com/docs/developer-guides/text-generation/thinking
+	ThinkingBudget *int `json:"thinking_budget,omitempty"`
 }
 
 type StreamOptions struct {
